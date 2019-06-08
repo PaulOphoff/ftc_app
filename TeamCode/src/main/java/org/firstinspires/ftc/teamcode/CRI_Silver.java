@@ -12,8 +12,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class CRI_Silver extends BlackoutAutonomousOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor leftBackDrive;
-    private DcMotor rightBackDrive;
     private DcMotor leftLift;
     private DcMotor rightLift;
     private DcMotor MtDew;
@@ -208,12 +206,5 @@ public class CRI_Silver extends BlackoutAutonomousOpMode {
         }
 
         return goldCount > silverCount;
-    } /*
-    private void updateTelemetry(String currentTask) {
-        // Show the elapsed game time and wheel power.
-        telemetry.addData("Time", "%.1f", getRuntime());
-        telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftBackPower, rightBackPower);
-        telemetry.addData("Task", currentTask);
-        telemetry.update();
-    } */
+    }
 }
