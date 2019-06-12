@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
-import com.qualcomm.robotcore.hardware.NormalizedRGBA;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -64,6 +63,8 @@ public class CRI_Silver extends BlackoutAutonomousOpMode {
         unhook();
 
         moveToSample();
+
+        positionToSample();
 
         if (isSampleGold()) {
             sample("Middle");
@@ -131,6 +132,14 @@ public class CRI_Silver extends BlackoutAutonomousOpMode {
         stopMotors();
     }
 
+    private void positionToSample() {
+        double totalDistance = 0;
+        while (((isSampleGold() == false) && (isSampleSilver() == false)) && totalDistance < 8) {
+            encoderDrive(.5, 1.5, -1.5, 1);
+            totalDistance += 1.5;
+        }
+    }
+
     private void sample(String samplePosition) {
         updateTelemetry("Sampling " + samplePosition);
 
@@ -182,29 +191,5 @@ public class CRI_Silver extends BlackoutAutonomousOpMode {
         leftLift.setPower(0);
         rightLift.setPower(0);
         MtDew.setPower(0);
-    }
-
-    private boolean isSampleGold() {
-        double startTime = getRuntime();
-        long goldCount = 0;
-        long silverCount = 0;
-
-        while(getRuntime() - startTime <= .5) {
-            NormalizedRGBA sampleColors = SampleSensor.getNormalizedColors();
-            float max = Math.max(Math.max(sampleColors.red, sampleColors.green), sampleColors.blue);
-            sampleColors.red /= max;
-            sampleColors.green /= max;
-            sampleColors.blue /= max;
-            double goldness = 75 * (sampleColors.red + sampleColors.green -2 * sampleColors.blue);
-            if(goldness >= 55) {
-                goldCount++;
-            } else {
-                silverCount++;
-            }
-            telemetry.addData("Sampling", "Gold : (%d)\tSilver : (%d)\t Goldness : (%.2f)", goldCount, silverCount, goldness);
-            telemetry.update();
-        }
-
-        return goldCount > silverCount;
     }
 }

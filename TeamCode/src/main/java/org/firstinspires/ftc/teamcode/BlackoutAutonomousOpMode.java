@@ -2,12 +2,24 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
+import com.qualcomm.robotcore.hardware.NormalizedRGBA;
+import com.qualcomm.robotcore.hardware.Servo;
 
 abstract class BlackoutAutonomousOpMode extends LinearOpMode {
 
 
     protected DcMotor leftBackDrive;
     protected DcMotor rightBackDrive;
+    protected DcMotor leftLift;
+    protected DcMotor rightLift;
+    protected DcMotor MtDew;
+    protected DcMotor DrPepper;
+    protected DcMotor MineralLifter;
+    protected Servo latch;
+    protected NormalizedColorSensor SampleSensor;
+    double leftBackPower;
+    double rightBackPower;
     static final double countsPerMotor          = 1120 ;
     static final double gearReduction           = 1.0 ;
     static final double wheelDiameter           = 4.0 ;
@@ -16,9 +28,66 @@ abstract class BlackoutAutonomousOpMode extends LinearOpMode {
     static final double spinInchesPerDegrees    = (15.375 * Math.PI) / 334.0206185567;
     static final double rotateDegrees           = (30.75 * Math.PI) / 360;
     static final double spinCountsPerDegree     = (countsPerInch * spinInchesPerDegrees);
+    private boolean _isSampleGold = false;
+    private boolean _isSampleSilver = false;
 
+
+    public boolean isSampleGold() {
+        double startTime = getRuntime();
+        long goldCount = 0;
+        long silverCount = 0;
+
+        while(getRuntime() - startTime <= .5) {
+            NormalizedRGBA sampleColors = SampleSensor.getNormalizedColors();
+            float max = Math.max(Math.max(sampleColors.red, sampleColors.green), sampleColors.blue);
+            sampleColors.red /= max;
+            sampleColors.green /= max;
+            sampleColors.blue /= max;
+            double goldness = 75 * (sampleColors.red + sampleColors.green -2 * sampleColors.blue);
+            if(goldness >= 55) {
+                goldCount++;
+            } else {
+                silverCount++;
+            }
+            telemetry.addData("Sampling", "Gold : (%d)\tSilver : (%d)\t Goldness : (%.2f)", goldCount, silverCount, goldness);
+            telemetry.update();
+        }
+
+        return goldCount > silverCount;
+    }
+
+    public boolean isSampleSilver() {
+        double startTime = getRuntime();
+        long goldCount = 0;
+        long silverCount = 0;
+
+        while(getRuntime() - startTime <= .5) {
+            NormalizedRGBA sampleColors = SampleSensor.getNormalizedColors();
+            float max = Math.max(Math.max(sampleColors.red, sampleColors.green), sampleColors.blue);
+            sampleColors.red /= max;
+            sampleColors.green /= max;
+            sampleColors.blue /= max;
+            double goldness = 75 * (sampleColors.red + sampleColors.green -2 * sampleColors.blue);
+            if(goldness <= 25) {
+                goldCount++;
+            } else {
+                silverCount++;
+            }
+            telemetry.addData("Sampling", "Gold : (%d)\tSilver : (%d)\t Goldness : (%.2f)", goldCount, silverCount, goldness);
+            telemetry.update();
+        }
+
+        return goldCount > silverCount;
+    }
     public boolean isOpModeStillActive() {
         return opModeIsActive();
+    }
+    private void stopMotors() {
+        leftBackDrive.setPower(0);
+        rightBackDrive.setPower(0);
+        leftLift.setPower(0);
+        rightLift.setPower(0);
+        MtDew.setPower(0);
     }
     public void updateTelemetry(String currentTask) {
         // Show the elapsed game time and wheel power.
