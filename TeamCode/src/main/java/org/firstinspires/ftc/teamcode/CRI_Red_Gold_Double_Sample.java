@@ -91,42 +91,6 @@ public class CRI_Red_Gold_Double_Sample extends BlackoutAutonomousOpMode {
         }
     }
 
-    private void land() {
-        double startTime = getRuntime();
-        while (opModeIsActive() && (getRuntime() - startTime <= .4)) {
-            rightLift.setPower(1);
-            leftLift.setPower(-1);
-            updateTelemetry("Landing");
-        }
-        stopMotors();
-    }
-
-    private void unhook() {
-        double startTime = getRuntime();
-        while (opModeIsActive() && (getRuntime() - startTime <= .5)) {
-            rightLift.setPower(-1);
-            leftLift.setPower(1);
-            updateTelemetry("Unhooking");
-            latch.setPosition(0);
-            updateTelemetry("unlatching");
-            stopMotors();
-        }
-    }
-
-    private void moveToSample() {
-        double startTime = getRuntime();
-
-        stopMotors();
-        encoderDrive(.5, .375, -.375, .1);
-        updateTelemetry("Positioning To Sample");
-        encoderDrive(.5, -18.8, 18.8, 5);
-        updateTelemetry("Driving To First Sample");
-        stopMotors();
-        encoderSpin(.5, 84);
-        updateTelemetry("Spinning 90 Degrees");
-        stopMotors();
-    }
-
     private void positionToSample() {
         double totalDistance = 0;
         while (((isSampleGold() == false) && (isSampleSilver() == false)) && totalDistance < 8) {
@@ -145,17 +109,6 @@ public class CRI_Red_Gold_Double_Sample extends BlackoutAutonomousOpMode {
         hitGold();
         moveBackToCrater();
 
-    }
-
-    private void sample(String samplePosition) {
-        updateTelemetry("Sampling " + samplePosition);
-
-        encoderDrive(.5, -5, 5, 1);
-        encoderSpin(.5, 81);
-        encoderSpin(.5, -81);
-        encoderDrive(.5, 5, -5, 1);
-
-        updateTelemetry("Sampling " + samplePosition + " - Done!");
     }
 
     private void moveToDoubleSampleMiddle() {

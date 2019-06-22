@@ -23,8 +23,7 @@ public class CRI_Blue_Gold_Double_Sample extends BlackoutAutonomousOpMode {
     static final double countsPerMotor          = 1120 ;
     static final double gearReduction           = 1.0 ;
     static final double wheelDiameter           = 4.0 ;
-    static final double countsPerInch           = (countsPerMotor * gearReduction) /
-            (wheelDiameter * Math.PI);
+    static final double countsPerInch           = (countsPerMotor * gearReduction) / (wheelDiameter * Math.PI);
     static final double spinInchesPerDegrees    = (15.375 * Math.PI) / 334.0206185567;
     static final double rotateDegrees           = (30.75 * Math.PI) / 360;
     static final double spinCountsPerDegree     = (countsPerInch * spinInchesPerDegrees);
@@ -91,42 +90,6 @@ public class CRI_Blue_Gold_Double_Sample extends BlackoutAutonomousOpMode {
         }
     }
 
-    private void land() {
-        double startTime = getRuntime();
-        while (opModeIsActive() && (getRuntime() - startTime <= .4)) {
-            rightLift.setPower(1);
-            leftLift.setPower(-1);
-            updateTelemetry("Landing");
-        }
-        stopMotors();
-    }
-
-    private void unhook() {
-        double startTime = getRuntime();
-        while (opModeIsActive() && (getRuntime() - startTime <= .5)) {
-            rightLift.setPower(-1);
-            leftLift.setPower(1);
-            updateTelemetry("Unhooking");
-            latch.setPosition(0);
-            updateTelemetry("unlatching");
-            stopMotors();
-        }
-    }
-
-    private void moveToSample() {
-        double startTime = getRuntime();
-
-        stopMotors();
-        encoderDrive(.5, .375, -.375, .1);
-        updateTelemetry("Positioning To Sample");
-        encoderDrive(.5, -18, 18, 5);
-        updateTelemetry("Driving To First Sample");
-        stopMotors();
-        encoderSpin(.5, 84);
-        updateTelemetry("Spinning 90 Degrees");
-        stopMotors();
-    }
-
     private void positionToSample() {
         double totalDistance = 0;
         while (((isSampleGold() == false) && (isSampleSilver() == false)) && totalDistance < 8) {
@@ -144,18 +107,6 @@ public class CRI_Blue_Gold_Double_Sample extends BlackoutAutonomousOpMode {
         scoreMarker();
         hitGold();
         moveBackToCrater();
-
-    }
-
-    private void sample(String samplePosition) {
-        updateTelemetry("Sampling " + samplePosition);
-
-        encoderDrive(.5, -5, 5, 1);
-        encoderSpin(.5, 81);
-        encoderSpin(.5, -81);
-        encoderDrive(.5, 5, -5, 1);
-
-        updateTelemetry("Sampling " + samplePosition + " - Done!");
     }
 
     private void moveToDoubleSampleMiddle() {
@@ -202,7 +153,6 @@ public class CRI_Blue_Gold_Double_Sample extends BlackoutAutonomousOpMode {
         scoreMarker();
         hitGold();
         moveBackToCrater();
-
     }
 
     private void moveToDoubleSampleRight() {
@@ -224,7 +174,6 @@ public class CRI_Blue_Gold_Double_Sample extends BlackoutAutonomousOpMode {
         scoreMarker();
         hitGold();
         moveBackToCrater();
-
     }
 
     private void lastResort() {
@@ -255,7 +204,6 @@ public class CRI_Blue_Gold_Double_Sample extends BlackoutAutonomousOpMode {
         updateTelemetry("Moving To Depot");
         stopMotors();
     }
-
 
     private void goToNextSample() {
         double startTime = getRuntime();
@@ -292,12 +240,15 @@ public class CRI_Blue_Gold_Double_Sample extends BlackoutAutonomousOpMode {
     }
 
     private void driveToWall() {
+
         encoderDrive(.5, 30, -30, 10);
     }
+
     private void driveToDepot() {
         encoderSpin(.5, -136.5);
         encoderDrive(.5, -55, 55, 15);
     }
+
     private void scoreMarker() {
         double startTime = getRuntime();
         while (opModeIsActive() && (getRuntime() - startTime <= 1.5)) {
@@ -307,9 +258,8 @@ public class CRI_Blue_Gold_Double_Sample extends BlackoutAutonomousOpMode {
         }
     }
 
-
-
     private void Push(double speed) {
+
         MtDew.setPower(speed);
     }
 
