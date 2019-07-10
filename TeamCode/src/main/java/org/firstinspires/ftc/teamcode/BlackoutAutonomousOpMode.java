@@ -34,8 +34,14 @@ abstract class BlackoutAutonomousOpMode extends LinearOpMode {
     public void land() {
         double startTime = getRuntime();
         while (opModeIsActive() && (getRuntime() - startTime <= .4)) {
+            telemetry.addData("DEBUG", "rightLift.setPower(1)");
+            telemetry.update();
             rightLift.setPower(1);
+
+            telemetry.addData("DEBUG", "setPower(-1)");
+            telemetry.update();
             leftLift.setPower(-1);
+
             updateTelemetry("Landing");
         }
         stopMotors();

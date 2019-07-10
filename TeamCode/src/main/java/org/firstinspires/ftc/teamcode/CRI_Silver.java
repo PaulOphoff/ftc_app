@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Autonomous(name="CRI_Silver", group="Linear Opmode")
@@ -11,12 +10,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class CRI_Silver extends BlackoutAutonomousOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor leftLift;
-    private DcMotor rightLift;
-    private DcMotor MtDew;
-    private DcMotor MineralLifter;
-    private Servo latch;
-    private NormalizedColorSensor SampleSensor;
     double leftBackPower;
     double rightBackPower;
     static final double countsPerMotor          = 1120 ;
@@ -54,7 +47,7 @@ public class CRI_Silver extends BlackoutAutonomousOpMode {
         MineralLifter.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         MineralLifter.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-
+        telemetry.addData("status", "Waiting for start...");
 
         waitForStart();
 
@@ -134,9 +127,9 @@ public class CRI_Silver extends BlackoutAutonomousOpMode {
 
 
 
-    private void Push(double speed) {
-        MtDew.setPower(speed);
-    }
+    // private void Push(double speed) {
+    //     MtDew.setPower(speed);
+    // }
 
     private void stopMotors() {
         leftBackDrive.setPower(0);
