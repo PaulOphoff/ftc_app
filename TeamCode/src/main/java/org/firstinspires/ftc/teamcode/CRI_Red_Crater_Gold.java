@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Autonomous(name="CRI_Red_Crater_Gold", group="Linear Opmode")
@@ -11,12 +10,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class CRI_Red_Crater_Gold extends BlackoutAutonomousOpMode{
 
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor leftLift;
-    private DcMotor rightLift;
-    private DcMotor MtDew;
-    private DcMotor MineralLifter;
-    private Servo latch;
-    private NormalizedColorSensor SampleSensor;
     double leftBackPower;
     double rightBackPower;
     static final double countsPerMotor          = 1120 ;

@@ -16,7 +16,6 @@ public class BlackoutRoverRuckusTeleOp extends OpMode{
     private DcMotor RightLift = null;
     private DcMotor LeftLift = null;
     private DcMotor MineralLifter = null;
-    private DcMotor Flipper = null;
     private Servo LatchingArm = null;
 
 
@@ -37,7 +36,6 @@ public class BlackoutRoverRuckusTeleOp extends OpMode{
         initializeLatchingLift();
         initializeLatchingServo();
         initializeMineralLifter();
-        initializeFlipper();
     }
 
     @Override
@@ -47,7 +45,6 @@ public class BlackoutRoverRuckusTeleOp extends OpMode{
         checkLatchingLift();
         checkLatchingServo();
         checkMineralLifter();
-        checkFlipper();
     }
 
 
@@ -469,39 +466,5 @@ public class BlackoutRoverRuckusTeleOp extends OpMode{
         if (MineralLifter.getTargetPosition() == EncoderArmUp && MineralLiftGiveMorePower) {
             MineralLifter.setPower(.8);
         }
-    }
-
-
-    private void initializeFlipper() {
-        Flipper = hardwareMap.dcMotor.get("Flipper");
-    }
-
-
-    private void checkFlipper() {
-        flippingButton = gamepad2.left_stick_y;
-
-        if (isFlippingUp()) {
-            Flipper.setPower(flippingButton);
-        }
-
-        else if (isFlippingDown()) {
-            Flipper.setPower(flippingButton);
-        }
-
-        else if (isNotFlipping()) {
-            Flipper.setPower(0);
-        }
-    }
-
-    private boolean isFlippingUp() {
-        return (flippingButton > dead);
-    }
-
-    private boolean isFlippingDown() {
-        return (flippingButton < -dead);
-    }
-
-    private boolean isNotFlipping() {
-        return ((flippingButton > -dead) && (flippingButton < dead));
     }
 }
