@@ -18,8 +18,6 @@ abstract class BlackoutAutonomousOpMode extends LinearOpMode {
     protected DcMotor MineralLifter;
     protected Servo latch;
     protected NormalizedColorSensor SampleSensor;
-    double leftBackPower;
-    double rightBackPower;
     static final double countsPerMotor          = 1120 ;
     static final double gearReduction           = 1.0 ;
     static final double wheelDiameter           = 4.0 ;

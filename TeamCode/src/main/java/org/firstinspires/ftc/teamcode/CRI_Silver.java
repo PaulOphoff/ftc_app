@@ -84,6 +84,8 @@ public class CRI_Silver extends BlackoutAutonomousOpMode {
             stopMotors();
         }
 
+        crater();
+
         MineralLifter.setTargetPosition(-150);
         MineralLifter.setPower(1);
 
@@ -118,9 +120,13 @@ public class CRI_Silver extends BlackoutAutonomousOpMode {
     private void crater() {
         double startTime = getRuntime();
 
+        MineralLifter.setTargetPosition(-300);
+        MineralLifter.setPower(.6);
         encoderDrive(.5, 14.5, -14.5, 3);
         encoderSpin(.5, -84);
         encoderDrive(.5, -10, 10, 2);
+        MineralLifter.setTargetPosition(0);
+        MineralLifter.setPower(.6);
     }
 
 
