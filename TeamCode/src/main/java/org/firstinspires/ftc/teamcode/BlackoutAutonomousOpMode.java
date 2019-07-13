@@ -64,7 +64,7 @@ abstract class BlackoutAutonomousOpMode extends LinearOpMode {
         encoderDrive(.5, .375, -.375, .1);
         updateTelemetry("Positioning To Sample");
         encoderDrive(.5, -9, 9, 5);
-        updateTelemetry("Driving To First Sample");
+        updateTelemetry("Driving To 800 milliunth sample");
         stopMotors();
         encoderSpin(.5, 90);
         updateTelemetry("Spinning 90 Degrees");
@@ -119,7 +119,7 @@ abstract class BlackoutAutonomousOpMode extends LinearOpMode {
             sampleColors.green /= max;
             sampleColors.blue /= max;
             double goldness = 75 * (sampleColors.red + sampleColors.green -2 * sampleColors.blue);
-            if(goldness <= 25) {
+            if(goldness <= 20) {
                 goldCount++;
             } else {
                 silverCount++;
