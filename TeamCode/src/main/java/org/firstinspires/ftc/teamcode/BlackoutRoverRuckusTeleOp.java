@@ -24,7 +24,6 @@ public class BlackoutRoverRuckusTeleOp extends OpMode{
     double MineralPushingSpeedModifier = .6;
     double LatchingLiftSpeedModifier = .6;
     double dead = .15;
-    double flippingButton = 0;
 
 
     private final static int EncoderArmUp = -1310;

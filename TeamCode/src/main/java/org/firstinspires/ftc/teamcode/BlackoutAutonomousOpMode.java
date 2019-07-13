@@ -23,7 +23,7 @@ abstract class BlackoutAutonomousOpMode extends LinearOpMode {
     static final double wheelDiameter           = 4.0 ;
     static final double countsPerInch           = (countsPerMotor * gearReduction) /
             (wheelDiameter * Math.PI);
-    static final double spinInchesPerDegrees    = (15.375 * Math.PI) / 334.0206185567;
+    static final double spinInchesPerDegrees    = (15.375 * Math.PI) / 360;
     static final double rotateDegrees           = (30.75 * Math.PI) / 360;
     static final double spinCountsPerDegree     = (countsPerInch * spinInchesPerDegrees);
     private boolean _isSampleGold = false;
@@ -63,10 +63,10 @@ abstract class BlackoutAutonomousOpMode extends LinearOpMode {
         stopMotors();
         encoderDrive(.5, .375, -.375, .1);
         updateTelemetry("Positioning To Sample");
-        encoderDrive(.5, -18, 18, 5);
+        encoderDrive(.5, -9, 9, 5);
         updateTelemetry("Driving To First Sample");
         stopMotors();
-        encoderSpin(.5, 84);
+        encoderSpin(.5, 90);
         updateTelemetry("Spinning 90 Degrees");
         stopMotors();
     }

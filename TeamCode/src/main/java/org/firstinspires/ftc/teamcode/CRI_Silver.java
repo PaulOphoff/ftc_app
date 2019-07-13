@@ -10,14 +10,12 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class CRI_Silver extends BlackoutAutonomousOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
-    double leftBackPower;
-    double rightBackPower;
     static final double countsPerMotor          = 1120 ;
     static final double gearReduction           = 1.0 ;
     static final double wheelDiameter           = 4.0 ;
     static final double countsPerInch           = (countsPerMotor * gearReduction) /
             (wheelDiameter * Math.PI);
-    static final double spinInchesPerDegrees    = (15.375 * Math.PI) / 334.0206185567;
+    static final double spinInchesPerDegrees    = (15.375 * Math.PI) / 360;
     static final double rotateDegrees           = (30.75 * Math.PI) / 360;
     static final double spinCountsPerDegree     = (countsPerInch * spinInchesPerDegrees);
 
@@ -84,11 +82,15 @@ public class CRI_Silver extends BlackoutAutonomousOpMode {
             stopMotors();
         }
 
+        updateTelemetry("Starting Crater");
+
         crater();
 
-        MineralLifter.setTargetPosition(-150);
-        MineralLifter.setPower(1);
+        updateTelemetry("Crater Successful");
 
+        CraterGo();
+
+        updateTelemetry("CraterGo Successful");
     }
 
     private void positionToSample() {
@@ -96,6 +98,7 @@ public class CRI_Silver extends BlackoutAutonomousOpMode {
         while (((isSampleGold() == false) && (isSampleSilver() == false)) && totalDistance < 8) {
             encoderDrive(.5, 1.5, -1.5, 1);
             totalDistance += 1.5;
+            stopMotors();
         }
     }
 
@@ -127,6 +130,20 @@ public class CRI_Silver extends BlackoutAutonomousOpMode {
         encoderDrive(.5, -10, 10, 2);
         MineralLifter.setTargetPosition(0);
         MineralLifter.setPower(.6);
+        stopMotors();
+    }
+
+    private void CraterGo(){
+        double startTime = getRuntime();
+
+        MineralLifter.setTargetPosition(-300);
+        MineralLifter.setPower(.6);
+        encoderDrive(.5, 14.5, -14.5, 3);
+        encoderSpin(.5, -84);
+        encoderDrive(.5, -10, 10, 2);
+        MineralLifter.setTargetPosition(0);
+        MineralLifter.setPower(.6);
+        stopMotors();
     }
 
 
@@ -143,5 +160,6 @@ public class CRI_Silver extends BlackoutAutonomousOpMode {
         leftLift.setPower(0);
         rightLift.setPower(0);
         MtDew.setPower(0);
+        MineralLifter.setPower(0);
     }
 }
