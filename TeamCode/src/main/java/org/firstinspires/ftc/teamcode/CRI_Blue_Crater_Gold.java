@@ -96,7 +96,7 @@ public class CRI_Blue_Crater_Gold extends BlackoutAutonomousOpMode {
     private void positionToSample() {
         double totalDistance = 0;
         while (((isSampleGold() == false) && (isSampleSilver() == false)) && totalDistance < 8) {
-            encoderDrive(.5, 1.5, -1.5, 1);
+            encoderDrive(.3, 1.5, -1.5, 1);
             totalDistance += 1.5;
         }
     }
@@ -104,7 +104,7 @@ public class CRI_Blue_Crater_Gold extends BlackoutAutonomousOpMode {
     private void goToNextSample() {
         double startTime = getRuntime();
 
-        encoderDrive(.5, 14.5, -14.5, 3);
+        encoderDrive(.3, 14.5, -14.5, 3);
         updateTelemetry("MovingToNextSample");
 
         stopMotors();
@@ -113,7 +113,7 @@ public class CRI_Blue_Crater_Gold extends BlackoutAutonomousOpMode {
     private void goToLastSample() {
         double startTime = getRuntime();
 
-        encoderDrive(.5, -29, 29, 5);
+        encoderDrive(.3, -29, 29, 5);
         updateTelemetry("MovingToLastSample");
 
         stopMotors();
@@ -122,15 +122,15 @@ public class CRI_Blue_Crater_Gold extends BlackoutAutonomousOpMode {
     private void moveToMarker() {
         double startTime = getRuntime();
 
-        encoderDrive(.5, 14.5, -14.5, 7);
+        encoderDrive(.3, 14.5, -14.5, 7);
         updateTelemetry("Positioning For Marker");
         MineralLifter.setTargetPosition(-450);
         MineralLifter.setPower(.6);
         updateTelemetry("Lifting Arm Up");
         stopMotors();
-        encoderSpin(.5, -82.5);
+        encoderSpin(.3, -82.5);
         updateTelemetry("Positioning For Marker 2");
-        encoderDrive(.5, -30, 30, 15);
+        encoderDrive(.3, -30, 30, 15);
         updateTelemetry("Moving To Depot");
         stopMotors();
     }
@@ -139,8 +139,8 @@ public class CRI_Blue_Crater_Gold extends BlackoutAutonomousOpMode {
         encoderDrive(.5, -30, 30, 10);
     }
     private void driveToDepot() {
-        encoderSpin(.5, -137);
-        encoderDrive(.5, -55, 55, 15);
+        encoderSpin(.3, -137);
+        encoderDrive(.3, -55, 55, 15);
     }
     private void scoreMarker() {
         double startTime = getRuntime();
@@ -152,7 +152,7 @@ public class CRI_Blue_Crater_Gold extends BlackoutAutonomousOpMode {
         stopMotors();
     }
     private void driveToCrater() {
-        encoderSpin(.5, 180);
+        encoderSpin(.3, 180);
         encoderDrive(1, -75, 75, 25);
     }
 

@@ -85,7 +85,7 @@ public class CRI_Blue_Gold_Double_Sample extends BlackoutAutonomousOpMode {
     private void positionToSample() {
         double totalDistance = 0;
         while (((isSampleGold() == false) && (isSampleSilver() == false)) && totalDistance < 8) {
-            encoderDrive(.5, 1.5, -1.5, 1);
+            encoderDrive(.3, 1.5, -1.5, 1);
             totalDistance += 1.5;
         }
         while (totalDistance >= 8) {
@@ -103,40 +103,40 @@ public class CRI_Blue_Gold_Double_Sample extends BlackoutAutonomousOpMode {
 
     private void moveToDoubleSampleMiddle() {
 
-        encoderDrive(.5, 14.5, -14.5, 7);
+        encoderDrive(.3, 14.5, -14.5, 7);
         updateTelemetry("Positioning For Marker");
         stopMotors();
-        encoderSpin(.5, -45);
+        encoderSpin(.3, -45);
         updateTelemetry("Positioning For Marker 2");
         MineralLifter.setTargetPosition(-450);
         MineralLifter.setPower(.6);
         updateTelemetry("Lifting Arm Up");
-        encoderDrive(.5, -30, 30, 15);
+        encoderDrive(.3, -30, 30, 15);
         updateTelemetry("Moving To Depot");
         stopMotors();
     }
 
     private void hitGold() {
 
-        encoderSpin(.5, 82.5);
-        encoderDrive(.5, -30, 30, 15);
+        encoderSpin(.3, 82.5);
+        encoderDrive(.3, -30, 30, 15);
         MineralLifter.setTargetPosition(0);
         MineralLifter.setPower(.6);
         MtDew.setPower(1);
         DrPepper.setPower(1);
-        encoderDrive(.5, -30, 30, 15);
+        encoderDrive(.3, -30, 30, 15);
         stopMotors();
-        encoderDrive(.5, 30, -30, 15);
+        encoderDrive(.3, 30, -30, 15);
         stopMotors();
     }
 
     private void moveBackToCrater() {
 
-        encoderDrive(.5, 27, -27, 15);
-        encoderSpin(.5, -82.5);
-        encoderDrive(.5, 60, -60, 15);
-        encoderSpin(.5, 82.5);
-        encoderDrive(.5, 40, -40, 15);
+        encoderDrive(.3, 27, -27, 15);
+        encoderSpin(.3, -82.5);
+        encoderDrive(.3, 60, -60, 15);
+        encoderSpin(.3, 82.5);
+        encoderDrive(.3, 40, -40, 15);
     }
 
     private void rightPath() {
@@ -150,12 +150,12 @@ public class CRI_Blue_Gold_Double_Sample extends BlackoutAutonomousOpMode {
     private void moveToDoubleSampleRight() {
 
         stopMotors();
-        encoderSpin(.5, -45);
+        encoderSpin(.3, -45);
         updateTelemetry("Positioning For Marker 2");
         MineralLifter.setTargetPosition(-450);
         MineralLifter.setPower(.6);
         updateTelemetry("Lifting Arm Up");
-        encoderDrive(.5, -18, 18, 15);
+        encoderDrive(.3, -18, 18, 15);
         updateTelemetry("Moving To Depot");
         stopMotors();
     }
@@ -184,15 +184,15 @@ public class CRI_Blue_Gold_Double_Sample extends BlackoutAutonomousOpMode {
 
     private void moveToDoubleSampleLeft() {
 
-        encoderDrive(.5, 14.5, -14.5, 7);
+        encoderDrive(.3, 14.5, -14.5, 7);
         updateTelemetry("Positioning For Marker");
         stopMotors();
-        encoderSpin(.5, -45);
+        encoderSpin(.3, -45);
         updateTelemetry("Positioning For Marker 2");
         MineralLifter.setTargetPosition(-450);
         MineralLifter.setPower(.6);
         updateTelemetry("Lifting Arm Up");
-        encoderDrive(.5, -42, 42, 15);
+        encoderDrive(.3, -42, 42, 15);
         updateTelemetry("Moving To Depot");
         stopMotors();
     }
@@ -200,7 +200,7 @@ public class CRI_Blue_Gold_Double_Sample extends BlackoutAutonomousOpMode {
     private void goToNextSample() {
         double startTime = getRuntime();
 
-        encoderDrive(.5, 14.5, -14.5, 3);
+        encoderDrive(.3, 14.5, -14.5, 3);
         updateTelemetry("MovingToNextSample");
 
         stopMotors();
@@ -209,7 +209,7 @@ public class CRI_Blue_Gold_Double_Sample extends BlackoutAutonomousOpMode {
     private void goToLastSample() {
         double startTime = getRuntime();
 
-        encoderDrive(.5, -29, 29, 5);
+        encoderDrive(.3, -29, 29, 5);
         updateTelemetry("MovingToLastSample");
 
         stopMotors();
@@ -224,21 +224,21 @@ public class CRI_Blue_Gold_Double_Sample extends BlackoutAutonomousOpMode {
         MineralLifter.setPower(.6);
         updateTelemetry("Lifting Arm Up");
         stopMotors();
-        encoderSpin(.5, -82.5);
+        encoderSpin(.3, -82.5);
         updateTelemetry("Positioning For Marker 2");
-        encoderDrive(.5, -30, 30, 15);
+        encoderDrive(.3, -30, 30, 15);
         updateTelemetry("Moving To Depot");
         stopMotors();
     }
 
     private void driveToWall() {
 
-        encoderDrive(.5, 30, -30, 10);
+        encoderDrive(.3, 30, -30, 10);
     }
 
     private void driveToDepot() {
-        encoderSpin(.5, -136.5);
-        encoderDrive(.5, -55, 55, 15);
+        encoderSpin(.3, -136.5);
+        encoderDrive(.3, -55, 55, 15);
     }
 
     private void scoreMarker() {
