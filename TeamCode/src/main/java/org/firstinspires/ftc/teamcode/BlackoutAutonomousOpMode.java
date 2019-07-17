@@ -61,12 +61,12 @@ abstract class BlackoutAutonomousOpMode extends LinearOpMode {
         double startTime = getRuntime();
 
         stopMotors();
-        encoderDrive(.5, .375, -.375, .1);
+        encoderDrive(.3, .375, -.375, .1);
         updateTelemetry("Positioning To Sample");
-        encoderDrive(.5, -9, 9, 5);
-        updateTelemetry("Driving To 800 milliunth sample");
+        encoderDrive(.3, -17, 17, 5);
+        updateTelemetry("Driving To First Sample");
         stopMotors();
-        encoderSpin(.5, 90);
+        encoderSpin(.3, 90);
         updateTelemetry("Spinning 90 Degrees");
         stopMotors();
     }
@@ -74,10 +74,10 @@ abstract class BlackoutAutonomousOpMode extends LinearOpMode {
     public void sample(String samplePosition) {
         updateTelemetry("Sampling " + samplePosition);
 
-        encoderDrive(.5, -5, 5, 1);
-        encoderSpin(.5, 81);
-        encoderSpin(.5, -81);
-        encoderDrive(.5, 5, -5, 1);
+        encoderDrive(.3, -5, 5, 1);
+        encoderSpin(.3, 81);
+        encoderSpin(.3, -81);
+        encoderDrive(.3, 5, -5, 1);
 
         updateTelemetry("Sampling " + samplePosition + " - Done!");
     }
